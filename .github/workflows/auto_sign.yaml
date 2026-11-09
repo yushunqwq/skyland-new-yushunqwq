@@ -1,22 +1,22 @@
+```yaml
 # run main.py
 name: Auto Sign
 
 on:
   schedule:
-    - cron: '0 1 * * *'  # UTC 01:00（即北京时间 09:00）
+    - cron: '0 1 * * *'  # UTC 01:00（北京时间 09:00）
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      ACTIONS_RUNNER_FORCE_ACTIONS_NODE_VERSION: "node24"  # 消除 Node 20 弃用警告
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python 3.13
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.13'
           cache: 'pip'
@@ -35,3 +35,4 @@ jobs:
           EXIT_WHEN_FAIL: ${{ vars.EXIT_WHEN_FAIL }}
         run: |
           python src/main.py
+```
